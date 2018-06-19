@@ -42,7 +42,7 @@
           <li class="active"><a href="index.php">Inicio</a></li>
         <li><a href="formulariotiposusuarios.php">Tipos Usuarios</a></li>
         <li><a href="formulariousuarios.php">Registrarse</a></li>
-        <li><a href="formulariotipomuestra.php"> Muestra</a></li>
+        <li><a href="formularioingresomuestras.php"> Muestra</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>

@@ -1,5 +1,10 @@
 	
-<?php include("head.php"); ?>
+<?php include("head.php"); 
+ include ("BackEnd/conexion.php");
+    $conexion = new conexion();
+    $conn = $conexion->conectar();
+
+?>
 <div class="container">
 <form method="post" action="backend/main.php">
         <div class="row">
@@ -27,19 +32,34 @@
 	            </div>
 
                 <!---->
+
+                  <div class="col-lg-6">
+                     <div class="form-group ">
+                        <label>Tipo de Analisís</label>
+                        <select class="form-control" name="idtipomuestra">
+                            <?php
+                                $data = $conn->query("SELECT * FROM tiposmuestras");
+                                while($row = $data->fetch_assoc()){
+                                    echo "<option value='".$row['id_TipoMuestra']."'>".$row['descripcion']."</option>";
+                                }
+                            ?>
+                        </select>                            
+                    </div>
+                </div>
+                <!--  
                 <div class="col-lg-6">
-                 <div class="form-group ">
-                    <label>TipoMuestra:</label>
-                    <input type="text" name="idtipomuestra" class="form-control">
-                   
-                </div>
-            </div>
-                <!---->
-            <div class="col-lg-6">
-                 <div class="form-group ">
-                    <label>Estado Muestra:</label>
-                    <input type="number" name="idestadomuestra" class="form-control">      
-                </div>
+                    <div class="form-group ">
+                        <label>TipoMuestra:</label>
+                        <input type="text" name="idtipomuestra" class="form-control">
+                    </div>
+                </div> -->
+                   <!---->
+                
+                <div class="col-lg-6">
+                    <div class="form-group ">
+                        <label>Estado Muestra:</label>
+                        <input type="number" name="idestadomuestra" class="form-control">      
+                    </div>
             </div>
                 <!---->
             	<div class="col-lg-6">    

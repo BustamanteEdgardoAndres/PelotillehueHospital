@@ -51,12 +51,12 @@
                  <div class="form-group ">
                     <label>Telefono:</label>
                     <input type="text" name="telefono" class="form-control">
-                  B 
                 </div>
             </div>
                 <!---->
                 <div class="col-lg-6">
 	                 <div class="form-group ">
+                        <label> Tipo Usuario;  </label> 
 	                    <select class="form-control" name="idtipousuario">
                             <?php
                                 $data = $conn->query("SELECT * FROM tiposusuarios");

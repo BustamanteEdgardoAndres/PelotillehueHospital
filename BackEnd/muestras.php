@@ -3,6 +3,7 @@
 
 		public function consultar(){
 			$conn = $this->conectar();
+		/*	"SELECT usr.*, tipusr.* FROM usuarios usr LEFT JOIN tiposusuarios tipusr ON usr.idtipousuario = tipusr.idTiposUsuario");*/
 			$data = $conn->query("SELECT * FROM ingresomuestras");
 			$registros = [];
 			while ($row = $data->fetch_assoc()) {
@@ -20,7 +21,7 @@
 			$conn = $this->conectar();
 			$conn->query("INSERT INTO ingresomuestras 
 						  VALUES
-        		(null, '".$fecha."',".$gramos.",".$cmcubicos.",".$tipomuestra.",".$estadomuestra.")");
+        		(null, ".$fecha.",".$gramos.",".$cmcubicos.",".$tipomuestra.",".$estadomuestra.")");	
 			if($conn->affected_rows > 0){
 				return true;
 			}else{
