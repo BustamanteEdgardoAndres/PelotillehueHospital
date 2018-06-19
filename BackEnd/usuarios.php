@@ -17,7 +17,7 @@
 			$direccion = $datospost['direccion'];
 			$email = $datospost['email'];
 			$telefono = $datospost['telefono'];
-			$contrasena = $datospost['contrasena'];
+			$contrasena = password_hash($datospost['contrasena'], PASSWORD_DEFAULT);
 			$tipousuario = $datospost['idtipousuario'];
 			$conn = $this->conectar();
 			$conn->query("INSERT INTO 

@@ -3,7 +3,6 @@
  include ("BackEnd/conexion.php");
     $conexion = new conexion();
     $conn = $conexion->conectar();
-
 ?>
 <div class="container">
 <form method="post" action="backend/main.php">
@@ -57,15 +56,15 @@
                 
                 <div class="col-lg-6">
                     <div class="form-group ">
-                        <label>Estado Muestra:</label>
-                        <input type="number" name="idestadomuestra" class="form-control">      
+                        <input type="hidden" name="idestadomuestra" value="1" class="form-control">      
                     </div>
             </div>
                 <!---->
             	<div class="col-lg-6">    
-                    <input type="hidden" name="form" value="guardarmuestra">            
+                    <input type="hidden" name="form" value="guardarmuestra">
+                    <input type="submit" name="cantidadMuestras" value="Cantidad" class="btn btn-success">      
                     <input type="submit" name="enviar" value="Enviar" class="btn btn-success">
-    		</div>
+		        </div>
             </div>
         </div>
         </form>

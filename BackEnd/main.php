@@ -5,73 +5,74 @@
   include("tiposmuestras.php");
   include("estadomuestra.php");
   include("muestras.php");
+  include("login.php");
 
 	$usuarios = new usuarios();
 	$tiposusuarios = new tiposusuarios();
   $tiposmuestras = new tiposmuestras();
   $estadomuestra = new estadomuestra();
+  $login = new login();
   $muestras = new muestras();
 
 	if(isset($_GET['form']))
-         {
-            switch ($_GET['form']) 
-            {
+     {
+    switch ($_GET['form']) 
+    {
+      case 'consultartiposusuarios':
+              include("../head.php");
+              $html = "<div class='container'>";
+              $html .= '<a href="formulariotiposusuarios.php" class="btn btn-success">Crear Tipo Usuario</a>';
+              $html .= '<table style="width:100%" class="table">
+                                <tr>
+                                  <th>Id</th>
+                                  <th>Nombre del Tipo</th> 
+                                </tr>';
+              foreach ($tiposusuarios->consultar() as $key => $value) {
+                  $html .= 	'<tr>
+                                <td>'.$value["idTiposUsuario"].'</td>
+                                <td>'.$value["descripcion"].'</td>
+                            </tr>';
+              }
+              $html .= '</table></div>';
+              echo $html;
+              include("../footer.php");
+      break;
 
-                    case 'consultartiposusuarios':
-                            include("../head.php");
-                            $html = "<div class='container'>";
-                            $html .= '<a href="../formulariotiposusuarios.php" class="btn btn-success">Crear Tipo Usuario</a>';
-                            $html .= '<table style="width:100%" class="table">
-                                              <tr>
-                                                <th>Id</th>
-                                                <th>Nombre del Tipo</th> 
-                                              </tr>';
-                                              foreach ($tiposusuarios->consultar() as $key => $value) {
-                                                    $html .= 	'<tr>
-                                                                            <td>'.$value["idTiposUsuario"].'</td>
-                                                                            <td>'.$value["descripcion"].'</td>
-                                                                    </tr>';
-                                              }
-                            $html .= '</table></div>';
-                            echo $html;
-                            include("../footer.php");
-                    break;
+      case 'consultarusuarios':
+              include("../head.php");
+              $html = "<div class='container'>";
+              $html .= '<a href="index.php" class="btn btn-success">Crear Usuario</a>';
+              $html .= '<table style="width:100%" class="table">
+                          <tr>
+                            <th>Id Usuario</th>
+                            <th>Rut</th> 
+                            <th>Nombre</th>
+                            <th>Dirección</th>
+                            <th>Email</th>
+                            <th>Telefono</th>
+                            <th>Tipo Usuario</th>
+                          </tr>';
+                          foreach ($usuarios->consultar() as $key => $value) {
+                              $html .=  '<tr>
+                                    <td>'.$value["idUsuarios"].'</td>
+                                    <td>'.$value["rut"].'</td>
+                                    <td>'.$value["nombre"].'</td>
+                                    <td>'.$value["direccion"].'</td>
+                                    <td>'.$value["email"].'</td>
+                                    <td>'.$value["telefono"].'</td>
+                                    <td>'.$value["descripcion"].'</td>
+                            </tr>';
+                                }
+              $html .= '</table></div>';
+              echo $html;
 
-                    case 'consultarusuarios':
-                            include("../head.php");
-                            $html = "<div class='container'>";
-                            $html .= '<a href="../index.php" class="btn btn-success">Crear Usuario</a>';
-                            $html .= '<table style="width:100%" class="table">
-                                        <tr>
-                                          <th>Id Usuario</th>
-                                          <th>Rut</th> 
-                                          <th>Nombre</th>
-                                          <th>Dirección</th>
-                                          <th>Email</th>
-                                          <th>Telefono</th>
-                                          <th>Tipo Usuario</th>
-                                        </tr>';
-                                        foreach ($usuarios->consultar() as $key => $value) {
-                                              $html .=  '<tr>
-                                                                      <td>'.$value["idUsuarios"].'</td>
-                                                                      <td>'.$value["rut"].'</td>
-                                                                      <td>'.$value["nombre"].'</td>
-                                                                      <td>'.$value["direccion"].'</td>
-                                                                      <td>'.$value["email"].'</td>
-                                                                      <td>'.$value["telefono"].'</td>
-                                                                      <td>'.$value["descripcion"].'</td>
-                                                              </tr>';
-                                              }
-                            $html .= '</table></div>';
-                            echo $html;
-
-                            include("../footer.php");
-                    break;
+              include("../footer.php");
+      break;
 
       case 'consultartiposmuestras':
           include("../head.php");
           $html = "<div class='container'>";
-          $html .= '<a href="../formulariotipomuestra.php" class="btn btn-success">Crear nuevo tipo de Muestra</a>';
+          $html .= '<a href="formulariotipomuestra.php" class="btn btn-success">Crear nuevo tipo de Muestra</a>';
           $html .= '<table style="width:100%" class="table">
                 <tr>
                   <th>Id</th>
@@ -94,7 +95,7 @@
         case 'consultarestado':
           include("../head.php");
           $html = "<div class='container'>";
-          $html .= '<a href="../formularioestadomuestra.php" class="btn btn-success">Crear nuevo estado</a>';
+          $html .= '<a href="formularioestadomuestra.php" class="btn btn-success">Crear nuevo estado</a>';
           $html .= '<table style="width:100%" class="table">
                     <tr>
                   <th>Id</th>
@@ -115,11 +116,15 @@
           case 'consultarmuestra':
             include("../head.php");
             $html = "<div class='container'>";
-            $html .= '<a href="../formularioingresomuestras.php" class="btn btn-success">Crear nueva muestra</a>';
+            $html .= '<a href="formularioingresomuestras.php" class="btn btn-success">Crear nueva muestra</a>';
             $html .= '<table style="width:100%" class="table">
                       <tr>
                     <th>Id</th>
-                    <th></th> 
+                    <th>Fecha</th>
+                    <th>Cantidad Gramos</th>
+                    <th>Cantidad CmCubicos</th>
+                    <th>Tipo Muestra</th>
+
                   </tr>';
                   foreach ($muestras->consultar() as $key => $value) {
                     $html .=  '<tr>
@@ -127,8 +132,7 @@
                         <td>'.$value["fecha_recepcion"].'</td>
                         <td>'.$value["cantidad_gramos"].'</td>
                         <td>'.$value["cantidad_cm_cubicos"].'</td>
-                          <td>'.$value["TiposMuestras_id_TipoMuestra"].'</td>
-                          <td>'.$value["EstadoMuestra_id_EstadoMuestra"].'</td>
+                        <td>'.$value["descripcion"].'</td>
                 </tr>';
                   }
             $html .= '</table></div>';
@@ -137,10 +141,32 @@
           include("../footer.php");
         break;
   
-
-
+        case 'cantidadMuestras':
+              include("../head.php");
+              $html = "<div class='container'>";
+              $html .= '<a href="formularioingresomuestras.php" class="btn btn-success">Crear Muestra </a>';
+              $html .= '<table style="width:100%" class="table">
+                                <tr>
+                                  <th>Total: </th> 
+                                </tr>';
+              foreach ($muestras->cantidadMuestras() as $key => $value) {
+                  $html .=  '<tr>
+                                <td>'.$value["total"].'</td>;
+                            </tr>';
+              }
+              $html .= '</table></div>';
+              echo $html;
+              include("../footer.php");
+           break;
+           case 'cerrarsesion':
+              session_start();
+              $_SESSION = [];
+              session_destroy();
+              header("location: ../index.php");
+           break;
 
             }
+
         }
 
 	if(isset($_POST['form'])){
@@ -195,8 +221,8 @@
             $respuesta = $estadomuestra->guardar($_POST);
             if($respuesta)  
             {
-                echo "<h1>Estado ingresado</h1>";
-                echo  '<a href="main.php?form=consultarestado" class="btn btn-success">Ver Estado</a>';
+                echo "<h1>Muestra Ingresada</h1>";
+                echo  '<a href="main.php?form=consultarestado" class="btn btn-success">Ver Muestras</a>';
             }
             else
             {
@@ -215,9 +241,31 @@
             }
             else
             {
-                    "<h1>Datos no se pudieron guardar</h1>";
+                   echo "<h1>Datos no se pudieron guardar</h1>";
             }
             include("../footer.php");
+      break;
+
+       case 'login':
+            $usuario = $_POST['usuario'];
+            $pass = $_POST['contrasena'];
+            $res = $login->logear(strtoupper($usuario));
+
+            if(count($res) == 1){
+              if(password_verify($pass, $res[0]['contrasena'])){
+                session_start();
+                session_id();
+                $_SESSION['id'] = rand(9,999);
+                $_SESSION['nombre'] = $res[0]['nombre'];
+                header("location: ../index.php");
+              }else{
+                echo "<h1>Usuario y Contraseña Incorrectas</h1>";
+              }
+            }else{
+              echo "<h1>Usuario y Contraseña Incorrectas</h1>";
+            }
+
+
       break;
 
 		}
