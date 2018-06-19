@@ -30,6 +30,7 @@
       }
     </style>
   </head>
+
   <body>
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
@@ -44,10 +45,10 @@
 
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.php">Inicio</a></li>
+              <li class="active"><a href="index.php">Inicio</a></li>
             <li><a href="formulariotiposusuarios.php">Tipos Usuarios</a></li>
             <li><a href="formulariousuarios.php">Registrarse</a></li>
-            <li><a href="formulariotipomuestra.php"> Muestra</a></li>
+            <li><a href="formularioingresomuestras.php"> Muestra</a></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
@@ -56,4 +57,4 @@
           </ul>
         </div>
       </div>
-    </nav>    
+    </nav>
