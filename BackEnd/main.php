@@ -5,12 +5,14 @@
   include("tiposmuestras.php");
   include("estadomuestra.php");
   include("muestras.php");
+  include("UsuariosMuestras.php");
   include("login.php");
 
 	$usuarios = new usuarios();
 	$tiposusuarios = new tiposusuarios();
   $tiposmuestras = new tiposmuestras();
   $estadomuestra = new estadomuestra();
+  $usuariomuestra= new usuariosmuestras();
   $login = new login();
   $muestras = new muestras();
 
@@ -41,7 +43,6 @@
       case 'consultarusuarios':
               include("../head.php");
               $html = "<div class='container'>";
-              $html .= '<a href="index.php" class="btn btn-success">Crear Usuario</a>';
               $html .= '<table style="width:100%" class="table">
                           <tr>
                             <th>Id Usuario</th>
@@ -51,6 +52,7 @@
                             <th>Email</th>
                             <th>Telefono</th>
                             <th>Tipo Usuario</th>
+                            <th>Acciones</th>
                           </tr>';
                           foreach ($usuarios->consultar() as $key => $value) {
                               $html .=  '<tr>
@@ -61,6 +63,7 @@
                                     <td>'.$value["email"].'</td>
                                     <td>'.$value["telefono"].'</td>
                                     <td>'.$value["descripcion"].'</td>
+                                    <td><a href="formularioMuestraUsuario.php?id='.$value["idUsuarios"].'">Asignar Muestra</a></td>
                             </tr>';
                                 }
               $html .= '</table></div>';
@@ -117,6 +120,7 @@
             include("../head.php");
             $html = "<div class='container'>";
             $html .= '<a href="formularioingresomuestras.php" class="btn btn-success">Crear nueva muestra</a>';
+            $html.='<a class="btn btn-success" href="BackEnd/main.php?form=cantidadMuestras"> Cantidad Muestras</a>' ;
             $html .= '<table style="width:100%" class="table">
                       <tr>
                     <th>Id</th>
@@ -158,6 +162,7 @@
               echo $html;
               include("../footer.php");
            break;
+
            case 'cerrarsesion':
               session_start();
               $_SESSION = [];
@@ -192,7 +197,6 @@
         if($respuesta)
         {
           echo "<h1> Usuario ingresado correctamente</h1>";
-          echo  '<a href="main.php?form=consultarusuarios" class="btn btn-success">Ver Usuarios</a>';
         }
         else
         {
@@ -236,8 +240,23 @@
             $respuesta = $muestras->guardar($_POST);
             if($respuesta)  
             {
-                echo "<h1>Estado ingresado</h1>";
-                echo  '<a href="main.php?form=consultarmuestra" class="btn btn-success">Ver Muestra</a>';
+                echo "<h1>Muestra Ingresda</h1>";
+                echo  '<a href="BackEnd/main.php?form=consultarmuestra" class="btn btn-success">Ver Muestra</a>';
+            }
+            else
+            {
+                   echo "<h1>Datos no se pudieron guardar</h1>";
+            }
+            include("../footer.php");
+      break;
+
+      case 'guardarMuestraUsuario':
+            include("../head.php");
+            $respuesta = $usuariomuestra->guardar($_POST);
+            if($respuesta)  
+            {
+                echo "<h1>Muestra Asociada de Manera Correcta</h1>";
+                echo  '<a href="BackEnd/main.php?form=consultarusuarios" class="btn btn-success">Ver Usuarios</a>';
             }
             else
             {
@@ -249,7 +268,7 @@
        case 'login':
             $usuario = $_POST['usuario'];
             $pass = $_POST['contrasena'];
-            $res = $login->logear(strtoupper($usuario));
+            $res = $login->logear(strtoupper(trim($usuario)));
 
             if(count($res) == 1){
               if(password_verify($pass, $res[0]['contrasena'])){
@@ -262,7 +281,7 @@
                 echo "<h1>Usuario y Contraseña Incorrectas</h1>";
               }
             }else{
-              echo "<h1>Usuario y Contraseña Incorrectas</h1>";
+              echo "<h1>Usuario No Encontrado</h1>";
             }
 
 

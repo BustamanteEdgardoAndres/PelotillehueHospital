@@ -31,13 +31,12 @@
 	            </div>
 
                 <!---->
-
                   <div class="col-lg-6">
                      <div class="form-group ">
                         <label>Tipo de Analisís</label>
                         <select class="form-control" name="idtipomuestra">
                             <?php
-                                $data = $conn->query("SELECT * FROM tiposmuestras");
+                                $data = $conn->query("SELECT * FROM TiposMuestras");
                                 while($row = $data->fetch_assoc()){
                                     echo "<option value='".$row['id_TipoMuestra']."'>".$row['descripcion']."</option>";
                                 }
@@ -61,8 +60,7 @@
             </div>
                 <!---->
             	<div class="col-lg-6">    
-                    <input type="hidden" name="form" value="guardarmuestra">
-                    <input type="submit" name="cantidadMuestras" value="Cantidad" class="btn btn-success">      
+                    <input type="hidden" name="form" value="guardarmuestra">  
                     <input type="submit" name="enviar" value="Enviar" class="btn btn-success">
 		        </div>
             </div>

@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Hospital Pelotillehue</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="http://localhost/HOSPITAL_BFR_OFICIAL/">
@@ -54,9 +54,8 @@
         if(isset($_SESSION) && isset($_SESSION['id']) && $_SESSION['id'] != ""){
           echo '<ul class="nav navbar-nav">
                     <li class="active"><a href="index.php">Inicio</a></li>
-                  <li><a href=".php">Buscar</a></li>
-                  <li><a href="formularioingresomuestras.php"> Muestra</a></li>
-                  <li><a href="BackEnd/main.php?form=cantidadMuestras"> Cantidad Muestras</a></li>
+                  <li><a href="BackEnd/main.php?form=consultarmuestra"> Ver  Muestras</a></li>
+                  <li><a href="BackEnd/main.php?form=consultarusuarios"> Ver  Usuarios</a></li>
                   <li><a href="BackEnd/main.php?form=cerrarsesion"> Cerrar Sesión</a></li>
                 </ul>';
         }else{

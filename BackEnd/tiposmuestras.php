@@ -12,8 +12,8 @@
 		}
 
 		public function guardar($datospost){
-			$tiposmuestras = $datospost['descripcion'];	
 			$conn = $this->conectar();
+			$tiposmuestras = $datospost['idtipomuestra'];
 			$conn->query("INSERT INTO tiposmuestras 
 						  VALUES (null, '".$tiposmuestras."')");
 			if($conn->affected_rows > 0){
