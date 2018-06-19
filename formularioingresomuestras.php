@@ -5,7 +5,7 @@
     $conn = $conexion->conectar();
 ?>
 <div class="container">
-<form method="post" action="backend/main.php">
+<form id="frmIngresoMuestra" method="post" action="backend/main.php">
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group ">
