@@ -208,13 +208,11 @@
        case 'guardarmuestra':
             include("../head.php");
             $respuesta = $muestras->guardar($_POST);
-            if($respuesta)  
-            {
+            if ($respuesta) {
                 echo "<h1>Estado ingresado</h1>";
-                echo  '<a href="main.php?form=consultarmuestra" class="btn btn-success">Ver Muestra</a>';
-            }
-            else
-            {
+                echo '<a href="main.php?form=consultarmuestra" class="btn btn-success">Ver Muestra</a>';
+                
+            } else {
                     "<h1>Datos no se pudieron guardar</h1>";
             }
             include("../footer.php");

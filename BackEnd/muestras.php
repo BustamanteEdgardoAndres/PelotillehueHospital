@@ -12,6 +12,7 @@
 		}
 
 		public function guardar($datospost){
+			//var_dump($datospost); exit();
 			$fecha = $datospost['fecha'];                        
 			$gramos = $datospost['gramos'];
 			$cmcubicos = $datospost['centimetroscubicos'];
