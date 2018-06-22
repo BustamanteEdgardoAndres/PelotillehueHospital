@@ -281,7 +281,11 @@
                 echo "<h1>Usuario y Contraseña Incorrectas</h1>";
               }
             }else{
+              include("../head.php");
               echo "<h1>Usuario No Encontrado</h1>";
+              echo "<br><br>";
+              echo "<a class='btn btn-primary' href='../HOSPITAL_BFR_OFICIAL/login.php'>Volver</a>";
+              include("../footer.php");
             }
 
 

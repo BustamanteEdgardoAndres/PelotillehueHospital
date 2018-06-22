@@ -11,9 +11,14 @@
 	                    <label>Asignar Muestras</label>
                         <select class="form-control" name="id_Muestras">
                             <?php
-                                $data = $conn->query("SELECT ingm.*, tipm.*
+                                $data = $conn->query("SELECT ingm.*, tipm.*, usr.*
                                  FROM ingresomuestras ingm LEFT JOIN tiposmuestras tipm ON
-                                 ingm.TiposMuestras_id_TipoMuestra = tipm.id_TipoMuestra");
+                                 ingm.TiposMuestras_id_TipoMuestra = tipm.id_TipoMuestra
+
+                                 LEFT JOIN UsuariosMuestras usrMts ON (usrMts.IngresoMuestras_id_Muestras = ingm.id_Muestras)
+                                 LEFT JOIN Usuarios usr ON (usrMts.Usuarios_idUsuarios = usr.idUsuarios)   
+
+                                 ");
                                 while($row = $data->fetch_assoc()){
                                     echo "<option value='".$row['id_Muestras']."'>".$row['descripcion'].",".$row['fecha_recepcion'].",".$row['cantidad_gramos'].",".$row['cantidad_cm_cubicos']."</option>";
                                 }
@@ -34,17 +39,23 @@
             <th>Fecha</th>
             <th>Cantidad Gramos</th>
             <th>Cantidad CmCubicos</th>
+            <th>Nombre Usuario</th>
           </tr>
           <?php
             $html = "";
             $idusuario = $_GET['id'];
-            $data = $conn->query("SELECT usrm.*, inm.* FROM UsuariosMuestras usrm LEFT JOIN IngresoMuestras inm ON usrm.IngresoMuestras_id_Muestras = inm.id_Muestras WHERE usrm.Usuarios_idUsuarios = ".$idusuario);
+            $data = $conn->query("SELECT usrm.*, inm.*, usr.* FROM UsuariosMuestras usrm 
+                                LEFT JOIN IngresoMuestras inm ON (usrm.IngresoMuestras_id_Muestras = inm.id_Muestras)
+                                LEFT JOIN Usuarios usr ON (usrm.Usuarios_idUsuarios = usr.idUsuarios)
+                                WHERE usrm.Usuarios_idUsuarios = ".$idusuario
+                            );
                 while($value = $data->fetch_assoc()){
                     $html .=  '<tr>
                                     <td>'.$value["id_Muestras"].'</td>
                                     <td>'.$value["fecha_recepcion"].'</td>
                                     <td>'.$value["cantidad_gramos"].'</td>
                                     <td>'.$value["cantidad_cm_cubicos"].'</td>
+                                    <td>'.$value["nombre"].'</td>
                                 </tr>';
                 }
 
